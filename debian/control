@@ -1,0 +1,12 @@
+Source: ros-jade-ros-control-boilerplate
+Section: misc
+Priority: extra
+Maintainer: Dave Coleman <davetcoleman@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), libgflags-dev, ros-jade-actionlib, ros-jade-catkin, ros-jade-cmake-modules, ros-jade-control-msgs, ros-jade-control-toolbox, ros-jade-controller-manager, ros-jade-hardware-interface, ros-jade-joint-limits-interface, ros-jade-roscpp, ros-jade-sensor-msgs, ros-jade-std-msgs, ros-jade-trajectory-msgs, ros-jade-transmission-interface, ros-jade-urdf
+Homepage: https://github.com/davetcoleman/ros_control_boilerplate
+Standards-Version: 3.9.2
+
+Package: ros-jade-ros-control-boilerplate
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jade-actionlib, ros-jade-control-msgs, ros-jade-control-toolbox, ros-jade-controller-manager, ros-jade-hardware-interface, ros-jade-joint-limits-interface, ros-jade-ros-controllers, ros-jade-roscpp, ros-jade-sensor-msgs, ros-jade-std-msgs, ros-jade-trajectory-msgs, ros-jade-transmission-interface, ros-jade-urdf
+Description: Simple simulation interface and template for setting up a hardware interface for ros_control
