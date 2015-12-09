@@ -2,6 +2,15 @@
 Changelog for package ros_control_boilerplate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.2.0 (2015-12-09)
+------------------
+* Do not automatically call init()
+* Removed warning of joint limits for continous joints
+* Fix missing variable
+* Improved rrbot_control example package
+* Moved rrbot example code into subdirectory
+* Contributors: Dave Coleman
+
 0.1.4 (2015-12-07)
 ------------------
 * Added missing dependency on sensor_msgs
