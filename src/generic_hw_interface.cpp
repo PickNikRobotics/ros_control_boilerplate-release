@@ -1,7 +1,7 @@
 /*********************************************************************
  * Software License Agreement (BSD License)
  *
- *  Copyright (c) 2015, University of Colorado, Boulder
+ *  Copyright (c) 2015, PickNik LLC
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -14,7 +14,7 @@
  *     copyright notice, this list of conditions and the following
  *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
- *   * Neither the name of the Univ of CO, Boulder nor the names of its
+ *   * Neither the name of PickNik LLC nor the names of its
  *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
  *
@@ -37,21 +37,23 @@
 */
 
 #include <ros_control_boilerplate/generic_hw_interface.h>
-//#include <control_toolbox/filters.h>
 #include <limits>
 
 namespace ros_control_boilerplate
 {
-GenericHWInterface::GenericHWInterface(ros::NodeHandle &nh, urdf::Model *urdf_model) : nh_(nh)
+GenericHWInterface::GenericHWInterface(ros::NodeHandle &nh, urdf::Model *urdf_model)
+  : nh_(nh)
+  , use_rosparam_joint_limits_(false)
 {
   // Check if the URDF model needs to be loaded
   if (urdf_model == NULL)
-    loadURDF(nh, "/robot_description");
+    loadURDF(nh, "robot_description");
   else
     urdf_model_ = urdf_model;
 
   // Initialize shared memory and interfaces here
-  init();  // this implementation loads from rosparam
+  // NEW: call this function separately
+  //init();  // this implementation loads from rosparam
 
   ROS_INFO_NAMED("generic_hw_interface", "Loaded generic_hw_interface.");
 }
@@ -167,8 +169,9 @@ void GenericHWInterface::registerJointLimits(const hardware_interface::JointHand
   }
   else
   {
-    ROS_WARN_STREAM_NAMED("generic_hw_interface", "Joint " << joint_names_[joint_id] << " does not have a URDF "
-                                                                                        "position limit");
+    if (urdf_joint->type != urdf::Joint::CONTINUOUS)
+      ROS_WARN_STREAM_NAMED("generic_hw_interface", "Joint " << joint_names_[joint_id] << " does not have a URDF "
+                            "position limit");
   }
 
   // Get limits from ROS param
@@ -256,26 +259,6 @@ void GenericHWInterface::registerJointLimits(const hardware_interface::JointHand
   }
 }
 
-void GenericHWInterface::enforceLimits(ros::Duration &period)
-{
-  // Note - you should only need to use one saturation interface,
-  // depending on your control method
-
-  // Saturation Limits
-
-  // Enforces position and velocity
-  pos_jnt_sat_interface_.enforceLimits(period);
-  // Enforces velocity and acceleration limits
-  // vel_jnt_sat_interface_.enforceLimits(period);
-  // Enforces position, velocity, and effort
-  // eff_jnt_sat_interface_.enforceLimits(period);
-
-  // Soft limits
-  //pos_jnt_soft_limits_.enforceLimits(period);
-  // vel_jnt_soft_limits_.enforceLimits(period);
-  // eff_jnt_soft_limits_.enforceLimits(period);
-}
-
 void GenericHWInterface::reset()
 {
   // Reset joint limits state, in case of mode switch or e-stop
@@ -322,7 +305,6 @@ std::string GenericHWInterface::printCommandHelper()
 void GenericHWInterface::loadURDF(ros::NodeHandle &nh, std::string param_name)
 {
   std::string urdf_string;
-  std::string robot_description = "/robot_description";
   urdf_model_ = new urdf::Model();
 
   // search and wait for robot_description on param server
@@ -331,14 +313,14 @@ void GenericHWInterface::loadURDF(ros::NodeHandle &nh, std::string param_name)
     std::string search_param_name;
     if (nh.searchParam(param_name, search_param_name))
     {
-      ROS_INFO_ONCE_NAMED("generic_hw_main", "Waiting for model URDF in parameter [%s] on the ROS param server.",
-                          search_param_name.c_str());
+      ROS_INFO_STREAM_NAMED("generic_hw_interface", "Waiting for model URDF on the ROS param server at location: " <<
+                            nh.getNamespace() << search_param_name);
       nh.getParam(search_param_name, urdf_string);
     }
     else
     {
-      ROS_INFO_ONCE_NAMED("generic_hw_main", "Waiting for model URDF in parameter [%s] on the ROS param server.",
-                          robot_description.c_str());
+      ROS_INFO_STREAM_NAMED("generic_hw_interface", "Waiting for model URDF on the ROS param server at location: " <<
+                            nh.getNamespace() << param_name);
       nh.getParam(param_name, urdf_string);
     }
 
@@ -346,9 +328,9 @@ void GenericHWInterface::loadURDF(ros::NodeHandle &nh, std::string param_name)
   }
 
   if (!urdf_model_->initString(urdf_string))
-    ROS_ERROR_STREAM_NAMED("generic_hw_main", "Unable to load URDF model");
+    ROS_ERROR_STREAM_NAMED("generic_hw_interface", "Unable to load URDF model");
   else
-    ROS_DEBUG_STREAM_NAMED("generic_hw_main", "Received URDF from param server");
+    ROS_DEBUG_STREAM_NAMED("generic_hw_interface", "Received URDF from param server");
 }
 
 }  // namespace
