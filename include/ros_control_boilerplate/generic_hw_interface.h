@@ -37,8 +37,8 @@
    simulation
 */
 
-#ifndef GENERIC_ROS_CONTROL__GENERIC_HW_INTERFACE_H
-#define GENERIC_ROS_CONTROL__GENERIC_HW_INTERFACE_H
+#ifndef GENERIC_ROS_CONTROL_GENERIC_HW_INTERFACE_H
+#define GENERIC_ROS_CONTROL_GENERIC_HW_INTERFACE_H
 
 // C++
 #include <boost/scoped_ptr.hpp>
@@ -134,6 +134,9 @@ protected:
   /** \brief Get the URDF XML from the parameter server */
   virtual void loadURDF(ros::NodeHandle& nh, std::string param_name);
 
+  // Short name of this class
+  std::string name_;
+
   // Startup and shutdown of the internal node inside a roscpp program
   ros::NodeHandle nh_;
 
@@ -160,6 +163,7 @@ protected:
 
   // Modes
   bool use_rosparam_joint_limits_;
+  bool use_soft_limits_if_available_;
 
   // States
   std::vector<double> joint_position_;
@@ -181,4 +185,4 @@ protected:
 
 }  // namespace
 
-#endif // GENERIC_ROS_CONTROL__GENERIC_HW_INTERFACE_H
+#endif // GENERIC_ROS_CONTROL_GENERIC_HW_INTERFACE_H
