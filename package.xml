@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>ros_control_boilerplate</name>
-  <version>0.2.1</version>
+  <version>0.3.0</version>
   <description>Simple simulation interface and template for setting up a hardware interface for ros_control</description>
 
   <maintainer email="davetcoleman@gmail.com">Dave Coleman</maintainer>
@@ -30,6 +30,7 @@
   <build_depend>cmake_modules</build_depend>
   <build_depend>libgflags-dev</build_depend>
   <build_depend>sensor_msgs</build_depend>
+  <build_depend>rosparam_shortcuts</build_depend>
 
   <run_depend>hardware_interface</run_depend>
   <run_depend>controller_manager</run_depend>
@@ -44,6 +45,7 @@
   <run_depend>control_toolbox</run_depend>
   <run_depend>std_msgs</run_depend>
   <run_depend>sensor_msgs</run_depend>
+  <run_depend>rosparam_shortcuts</run_depend>
 
   <export>
   </export>
