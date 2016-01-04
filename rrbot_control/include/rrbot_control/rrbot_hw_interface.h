@@ -33,30 +33,27 @@
  *********************************************************************/
 
 /* Author: Dave Coleman
-   Desc:   Example ros_control hardware interface that performs a perfect control loop for
-   simulation
+   Desc:   Example ros_control hardware interface blank template for the RRBot
+           For a more detailed simulation example, see sim_hw_interface.h
 */
 
-#ifndef GENERIC_ROS_CONTROL__SIM_HW_INTERFACE_H
-#define GENERIC_ROS_CONTROL__SIM_HW_INTERFACE_H
+#ifndef RRBOT_CONTROL__RRBOT_HW_INTERFACE_H
+#define RRBOT_CONTROL__RRBOT_HW_INTERFACE_H
 
 #include <ros_control_boilerplate/generic_hw_interface.h>
 
-namespace ros_control_boilerplate
+namespace rrbot_control
 {
 
-/** \brief Hardware interface for a robot */
-class SimHWInterface : public GenericHWInterface
+/// \brief Hardware interface for a robot
+class RRBotHWInterface : public ros_control_boilerplate::GenericHWInterface
 {
 public:
   /**
    * \brief Constructor
    * \param nh - Node handle for topics.
    */
-  SimHWInterface(ros::NodeHandle& nh, urdf::Model* urdf_model = NULL);
-
-  /** \brief Initialize the robot hardware interface */
-  virtual void init();
+  RRBotHWInterface(ros::NodeHandle& nh, urdf::Model* urdf_model = NULL);
 
   /** \brief Read the state from the robot hardware. */
   virtual void read(ros::Duration &elapsed_time);
@@ -66,21 +63,6 @@ public:
 
   /** \breif Enforce limits for all values before writing */
   virtual void enforceLimits(ros::Duration &period);
-
-protected:
-
-  /** \brief Basic model of system for position control */
-  virtual void positionControlSimulation(ros::Duration &elapsed_time, const std::size_t joint_id);
-
-  // Name of this class
-  std::string name_;
-
-  // Simulated controller
-  double p_error_;
-  double v_error_;
-
-  // For position controller to estimate velocity
-  std::vector<double> joint_position_prev_;
 
 };  // class
 
