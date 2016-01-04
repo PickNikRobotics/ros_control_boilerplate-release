@@ -15,7 +15,7 @@ Simple simulation interface and template for setting up a hardware interface for
 Developed by [Dave Coleman](http://dav.ee/) at the University of Colorado Boulder
 
  * [![Build Status](https://travis-ci.org/davetcoleman/ros_control_boilerplate.svg)](https://travis-ci.org/davetcoleman/ros_control_boilerplate) Travis CI
- * [![Devel Job Status](http://jenkins.ros.org/buildStatus/icon?job=devel-indigo-ros-control-boilerplate)](http://jenkins.ros.org/job/devel-indigo-ros_control_boilerplate) Devel Job Status
+ * [![Devel Job Status](http://jenkins.ros.org/buildStatus/icon?job=devel-indigo-ros_control_boilerplate)](http://jenkins.ros.org/job/devel-indigo-ros_control_boilerplate) Devel Job Status
  * [![Build Status](http://jenkins.ros.org/buildStatus/icon?job=ros-indigo-ros-control-boilerplate_binarydeb_trusty_amd64)](http://jenkins.ros.org/job/ros-indigo-ros-control-boilerplate_binarydeb_trusty_amd64/) AMD64 Debian Job Status
 
 <img src="https://raw.githubusercontent.com/davetcoleman/ros_control_boilerplate/jade-devel/resources/screenshot.png"/>
@@ -37,7 +37,7 @@ Then, either install this package from source so you can develop off of it, or i
 
 ## Run Simulation Demo
 
-This package is setup to run the "RRBot" two joint revolute-revolute robot demo. To run its ros_control non-physics-based simulated hardware interface, run:
+This package is setup to run the "RRBot" two joint revolute-revolute robot demo. This "template package" is located in the ros_control_boilerplate as a subfolder that you can easily rename and reuse. To run its ros_control non-physics-based simulated hardware interface, run:
 
     roslaunch ros_control_boilerplate rrbot_simulaton.launch
 
@@ -51,13 +51,24 @@ To send a random, dummy trajectory to execute, run:
 
 ## Customize
 
-To test this as a simulation interface for your robot:
+To test this as a simulation interface for your robot, you can quickly rename the subfolder package into the name of your robot using the following commands:
 
- - Rename all files in ``/launch`` to use your robot name
- - Find-replace all strings in ``/launch`` from "rrbot" to your robot name
- - Customize ``/config/rrbot_controllers.yaml`` to have joints corresponding to your robot's URDF
+```
+function findreplace() {
+    grep -lr -e "$1" * | xargs sed -i "s/$1/$2/g" ;
+}
 
-To test this as a hardware interface for your robot, you'll also want to rename the files in ``/src`` and find-replace the string "generic" to your robot's name. Then add the necessary code to communicate with your robot via USB/serial/ethernet/etc. Feel free to PR this package with better step by step instructions for this.
+function findreplacefilename() {
+    find . -depth -name "*$1*" -exec bash -c 'for f; do base=${f##*/}; mv -- "$f" "${f%/*}/${base//'$1'/'$2'}"; done' _ {} +
+}
+
+findreplacefilename rrbot myrobot
+findreplace rrbot myrobot
+findreplace RRBot MyRobot
+findreplace RRBOT MYROBOT
+```
+
+Then add the necessary code to communicate with your robot via USB/serial/ethernet/etc in the file ``myrobot_hw_interface.cpp``.
 
 ## Setting an Initial Position, Using with MoveIt!
 
