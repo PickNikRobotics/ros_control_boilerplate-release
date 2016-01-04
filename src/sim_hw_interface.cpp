@@ -41,12 +41,21 @@
 
 namespace ros_control_boilerplate
 {
-SimHWInterface::SimHWInterface(ros::NodeHandle &nh, urdf::Model *urdf_model) : GenericHWInterface(nh, urdf_model)
+SimHWInterface::SimHWInterface(ros::NodeHandle &nh, urdf::Model *urdf_model)
+  : GenericHWInterface(nh, urdf_model)
+  , name_("sim_hw_interface")
 {
-  ROS_INFO_NAMED("generic_hw_interface", "Loaded sim_hw_interface.");
+}
+
+void SimHWInterface::init()
+{
+  // Call parent class version of this function
+  GenericHWInterface::init();
 
   // Resize vectors
   joint_position_prev_.resize(num_joints_, 0.0);
+
+  ROS_INFO_NAMED(name_, "SimHWInterface Ready.");
 }
 
 void SimHWInterface::read(ros::Duration &elapsed_time)
@@ -77,6 +86,11 @@ void SimHWInterface::write(ros::Duration &elapsed_time)
         break;
 
       case 1:  // hardware_interface::MODE_VELOCITY:
+        ROS_ERROR_STREAM_NAMED(name_, "Velocity not implemented yet");
+
+        /*
+        TODO: remove VELOCITY_STEP_FACTOR
+
         // Position - Move all the states to the commanded set points slowly
         joint_position_[joint_id] += joint_velocity_[joint_id] * elapsed_time.toSec();
 
@@ -85,13 +99,20 @@ void SimHWInterface::write(ros::Duration &elapsed_time)
         // scale the rate it takes to achieve velocity by a factor that is invariant to the feedback
         // loop
         joint_velocity_[joint_id] += v_error_ * VELOCITY_STEP_FACTOR;
+        */
         break;
 
       case 2:  // hardware_interface::MODE_EFFORT:
-        ROS_ERROR_STREAM_NAMED("generic_hw_interface", "Effort not implemented yet");
+        ROS_ERROR_STREAM_NAMED(name_, "Effort not implemented yet");
         break;
     }
   }
+}
+
+void SimHWInterface::enforceLimits(ros::Duration &period)
+{
+  // Enforces position and velocity
+  pos_jnt_sat_interface_.enforceLimits(period);
 }
 
 void SimHWInterface::positionControlSimulation(ros::Duration &elapsed_time, const std::size_t joint_id)
@@ -100,6 +121,7 @@ void SimHWInterface::positionControlSimulation(ros::Duration &elapsed_time, cons
 
   // Move all the states to the commanded set points at max velocity
   p_error_ = joint_position_command_[joint_id] - joint_position_[joint_id];
+
   const double delta_pos = std::max(std::min(p_error_, max_delta_pos), -max_delta_pos);
   joint_position_[joint_id] += delta_pos;
 
