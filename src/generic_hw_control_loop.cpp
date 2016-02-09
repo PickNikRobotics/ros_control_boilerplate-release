@@ -53,10 +53,10 @@ GenericHWControlLoop::GenericHWControlLoop(
 
   // Load rosparams
   ros::NodeHandle rpsnh(nh, name_);
-  int error = 0;
-  error += !rosparam_shortcuts::getDoubleParam(name_, rpsnh, "loop_hz", loop_hz_);
-  error += !rosparam_shortcuts::getDoubleParam(name_, rpsnh, "cycle_time_error_threshold", cycle_time_error_threshold_);
-  rosparam_shortcuts::shutdownIfParamErrors(name_, error);
+  std::size_t error = 0;
+  error += !rosparam_shortcuts::get(name_, rpsnh, "loop_hz", loop_hz_);
+  error += !rosparam_shortcuts::get(name_, rpsnh, "cycle_time_error_threshold", cycle_time_error_threshold_);
+  rosparam_shortcuts::shutdownIfError(name_, error);
 
   // Get current time for use with first update
   clock_gettime(CLOCK_MONOTONIC, &last_time_);
