@@ -1,3 +1,26 @@
+## ros_control_boilerplate (kinetic) - 0.4.0-0
+
+The packages in the `ros_control_boilerplate` repository were released into the `kinetic` distro by running `/usr/bin/bloom-release ros_control_boilerplate -t kinetic -r kinetic` on `Wed, 29 Jun 2016 19:43:59 -0000`
+
+The `ros_control_boilerplate` package was released.
+
+Version of package(s) in repository `ros_control_boilerplate`:
+
+- upstream repository: https://github.com/davetcoleman/ros_control_boilerplate.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `0.4.0-0`
+
+Versions of tools used:
+
+- bloom version: `0.5.21`
+- catkin_pkg version: `0.2.10`
+- rosdep version: `0.11.5`
+- rosdistro version: `0.4.7`
+- vcstools version: `0.1.38`
+
+
 ## ros_control_boilerplate (jade) - 0.3.1-0
 
 The packages in the `ros_control_boilerplate` repository were released into the `jade` distro by running `/usr/bin/bloom-release ros_control_boilerplate -t jade -r jade` on `Tue, 09 Feb 2016 22:27:35 -0000`
