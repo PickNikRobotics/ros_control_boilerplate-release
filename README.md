@@ -1,3 +1,26 @@
+## ros_control_boilerplate (melodic) - 0.5.0-1
+
+The packages in the `ros_control_boilerplate` repository were released into the `melodic` distro by running `/usr/bin/bloom-release ros_control_boilerplate -t melodic -r melodic` on `Wed, 18 Sep 2019 18:14:45 -0000`
+
+The `ros_control_boilerplate` package was released.
+
+Version of package(s) in repository `ros_control_boilerplate`:
+
+- upstream repository: https://github.com/PickNikRobotics/ros_control_boilerplate.git
+- release repository: https://github.com/PickNikRobotics/ros_control_boilerplate-release.git
+- rosdistro version: `0.4.1-0`
+- old version: `0.4.1-0`
+- new version: `0.5.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.8.0`
+- catkin_pkg version: `0.4.13`
+- rosdep version: `0.15.2`
+- rosdistro version: `0.7.4`
+- vcstools version: `0.1.42`
+
+
 ## ros_control_boilerplate (melodic) - 0.4.1-0
 
 The packages in the `ros_control_boilerplate` repository were released into the `melodic` distro by running `/usr/bin/bloom-release ros_control_boilerplate -t melodic -r melodic` on `Fri, 01 Jun 2018 00:17:49 -0000`
