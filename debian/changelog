@@ -1,0 +1,126 @@
+ros-melodic-ros-control-boilerplate (0.5.0-1stretch) stretch; urgency=high
+
+  * Merge pull request #20 <https://github.com/PickNikRobotics/ros_control_boilerplate/issues/20> from ipa-mdl/fix-loop-deadlock
+    refactor GenericHWControlLoop to a sleep-based loop
+  * Merge pull request #19 <https://github.com/PickNikRobotics/ros_control_boilerplate/issues/19> from PaulBouchier/kinetic-devel
+    change sim_control_mode to 0 (position) so demo works
+  * Merge pull request #21 <https://github.com/PickNikRobotics/ros_control_boilerplate/issues/21> from MohmadAyman/fix_typo
+    fixed a typo in readme
+  * fixed a typo in readme
+  * refactor GenericHWControlLoop to a sleep-based loop
+    using ros:Timer might lead to deadlocks
+  * initialize desired_update_period_ (renamed from desired_update_freq_)
+  * Revert "Depend on Eigen3"
+    This reverts commit 608cc2fd64739ee56c3fbd5a0ae9d5d26b5684d0.
+  * change sim_control_mode to 0 (position) so demo works
+  * Merge pull request #16 <https://github.com/PickNikRobotics/ros_control_boilerplate/issues/16> from lucasw/xml-version
+    xml version tags for all launch files.
+  * xml version tags for all launch files.
+  * Merge pull request #15 <https://github.com/PickNikRobotics/ros_control_boilerplate/issues/15> from enricotoi/kinetic-devel
+    Fixed a typo in the README.md
+  * Fixed a typo in the README.md
+    rrbot_simulaton.launch -> rrbot_simulation.launch
+  * Update README.md
+  * Contributors: Dave Coleman, Lucas Walter, Mathias Lüdtke, Paul Bouchier, enrico toivinen, mohmad ayman
+
+ -- Dave Coleman <davetcoleman@gmail.com>  Tue, 17 Sep 2019 21:00:00 -0000
+
+ros-melodic-ros-control-boilerplate (0.4.1-1stretch) stretch; urgency=high
+
+  * Changed boost::shared_ptr to typedef for Lunar support
+  * Implemented simulated velocity control
+  * Contributors: Dave Coleman
+
+ -- Dave Coleman <davetcoleman@gmail.com>  Mon, 19 Jun 2017 21:00:00 -0000
+
+ros-melodic-ros-control-boilerplate (0.4.0-1stretch) stretch; urgency=high
+
+  * Depend on Eigen3
+  * Remove dependency on meta package
+  * Fixed var name
+  * Contributors: Dave Coleman
+
+ -- Dave Coleman <davetcoleman@gmail.com>  Tue, 28 Jun 2016 21:00:00 -0000
+
+ros-melodic-ros-control-boilerplate (0.3.1-1stretch) stretch; urgency=high
+
+  * API deprecation fix for rosparam_shortcuts
+  * Switched to better use of rosparam_shortcuts
+  * Ability to record all controller status data, not just at certain frequency
+  * Contributors: Dave Coleman
+
+ -- Dave Coleman <davetcoleman@gmail.com>  Tue, 12 Jan 2016 22:00:00 -0000
+
+ros-melodic-ros-control-boilerplate (0.3.0-1stretch) stretch; urgency=high
+
+  * Removed bad reference name
+  * Switched to using name_
+  * Record error data
+  * Disable soft joint limits
+  * header to debug output
+  * Added error checking of control loops time
+  * Fix init() bug
+  * Contributors: Dave Coleman
+
+ -- Dave Coleman <davetcoleman@gmail.com>  Sat, 26 Dec 2015 22:00:00 -0000
+
+ros-melodic-ros-control-boilerplate (0.2.1-1stretch) stretch; urgency=high
+
+  * Merge branch 'indigo-devel' of github.com:davetcoleman/ros_control_boilerplate into indigo-devel
+  * Fix install path
+  * Improve user output message
+  * Contributors: Dave Coleman
+
+ -- Dave Coleman <davetcoleman@gmail.com>  Tue, 08 Dec 2015 22:00:00 -0000
+
+ros-melodic-ros-control-boilerplate (0.2.0-1stretch) stretch; urgency=high
+
+  * Do not automatically call init()
+  * Removed warning of joint limits for continous joints
+  * Fix missing variable
+  * Improved rrbot_control example package
+  * Moved rrbot example code into subdirectory
+  * Contributors: Dave Coleman
+
+ -- Dave Coleman <davetcoleman@gmail.com>  Tue, 08 Dec 2015 22:00:00 -0000
+
+ros-melodic-ros-control-boilerplate (0.1.4-1stretch) stretch; urgency=high
+
+  * Added missing dependency on sensor_msgs
+  * Contributors: Dave Coleman
+
+ -- Dave Coleman <davetcoleman@gmail.com>  Sun, 06 Dec 2015 22:00:00 -0000
+
+ros-melodic-ros-control-boilerplate (0.1.3-1stretch) stretch; urgency=high
+
+  * Fix catkin lint errors
+  * Added FindGflags directly to this repo
+  * Minor fix
+  * Updated README
+  * Contributors: Dave Coleman
+
+ -- Dave Coleman <davetcoleman@gmail.com>  Fri, 04 Dec 2015 22:00:00 -0000
+
+ros-melodic-ros-control-boilerplate (0.1.2-1stretch) stretch; urgency=high
+
+  * Added dependency on gflags
+  * Contributors: Dave Coleman
+
+ -- Dave Coleman <davetcoleman@gmail.com>  Tue, 01 Dec 2015 22:00:00 -0000
+
+ros-melodic-ros-control-boilerplate (0.1.1-1stretch) stretch; urgency=high
+
+  * Added travis support
+  * Updated README
+  * Contributors: Dave Coleman
+
+ -- Dave Coleman <davetcoleman@gmail.com>  Tue, 01 Dec 2015 22:00:00 -0000
+
+ros-melodic-ros-control-boilerplate (0.1.0-1stretch) stretch; urgency=high
+
+  * Initial release of ros_control_boilerplate
+  * Contributors: Dave Coleman
+
+ -- Dave Coleman <davetcoleman@gmail.com>  Tue, 01 Dec 2015 22:00:00 -0000
+
+
