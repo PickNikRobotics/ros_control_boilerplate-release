@@ -27,8 +27,9 @@ Special thanks to the following maintainers of this repo:
 
 ## Status:
 
- * [![Build Status](https://travis-ci.org/PickNikRobotics/ros_control_boilerplate.svg?branch=kinetic-devel)](https://travis-ci.org/PickNikRobotics/ros_control_boilerplate) Travis CI
- * [![Devel Job Status](http://build.ros.org/buildStatus/icon?job=Kdev__ros_control_boilerplate__ubuntu_xenial_amd64)](http://build.ros.org/job/Kdev__ros_control_boilerplate__ubuntu_xenial_amd64/) Devel Job Status
+ * [![Build Status](https://travis-ci.org/PickNikRobotics/ros_control_boilerplate.svg?branch=melodic-devel)](https://travis-ci.org/PickNikRobotics/ros_control_boilerplate) Travis CI
+ * [![Devel Job Status](http://build.ros.org/buildStatus/icon?job=Mdev__ros_control_boilerplate__ubuntu_bionic_amd64)](http://build.ros.org/job/Mdev__ros_control_boilerplate__ubuntu_bionic_amd64/) Devel Job Status
+ * [![Build Status](http://build.ros.org/buildStatus/icon?job=Mbin_uB64__ros_control_boilerplate__ubuntu_bionic_amd64__binary)](http://build.ros.org/job/Mbin_uB64__ros_control_boilerplate__ubuntu_bionic_amd64__binary/) AMD64 Debian Job Status
 
 <img src="https://raw.githubusercontent.com/davetcoleman/ros_control_boilerplate/jade-devel/resources/screenshot.png"/>
 
