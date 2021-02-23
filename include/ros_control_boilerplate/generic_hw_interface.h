@@ -69,7 +69,7 @@ public:
    * \param nh - Node handle for topics.
    * \param urdf - optional pointer to a parsed robot model
    */
-  GenericHWInterface(ros::NodeHandle &nh, urdf::Model *urdf_model = NULL);
+  GenericHWInterface(const ros::NodeHandle &nh, urdf::Model *urdf_model = NULL);
 
   /** \brief Destructor */
   virtual ~GenericHWInterface() {}
@@ -80,8 +80,34 @@ public:
   /** \brief Read the state from the robot hardware. */
   virtual void read(ros::Duration &elapsed_time) = 0;
 
+  /** \brief Read the state from the robot hardware
+   *
+   * \note This delegates RobotHW::read() calls to read()
+   *
+   * \param time The current time, currently unused
+   * \param period The time passed since the last call
+   */
+  virtual void read(const ros::Time& /*time*/, const ros::Duration& period) override
+  {
+    ros::Duration elapsed_time = period;
+    read(elapsed_time);
+  }
+
   /** \brief Write the command to the robot hardware. */
   virtual void write(ros::Duration &elapsed_time) = 0;
+
+  /** \brief Write the command to the robot hardware
+   *
+   * \note This delegates RobotHW::write() calls to \ref write()
+   *
+   * \param time The current time, currently unused
+   * \param period The time passed since the last call
+   */
+  virtual void write(const ros::Time& /*time*/, const ros::Duration& period) override
+  {
+    ros::Duration elapsed_time = period;
+    write(elapsed_time);
+  }
 
   /** \brief Set all members to default values */
   virtual void reset();
@@ -132,7 +158,7 @@ public:
 protected:
 
   /** \brief Get the URDF XML from the parameter server */
-  virtual void loadURDF(ros::NodeHandle& nh, std::string param_name);
+  virtual void loadURDF(const ros::NodeHandle& nh, std::string param_name);
 
   // Short name of this class
   std::string name_;
