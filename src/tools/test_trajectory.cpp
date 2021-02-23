@@ -54,24 +54,21 @@ public:
   /**
    * \brief Constructor
    */
-  TestTrajectory()
-    : nh_private_("~")
+  TestTrajectory() : nh_private_("~")
   {
-    std::string action_topic;
-    nh_private_.getParam("action_topic", action_topic);
-    if (action_topic.empty())
+    nh_private_.getParam("trajectory_controller", trajectory_controller);
+    if (trajectory_controller.empty())
     {
-      ROS_FATAL_STREAM_NAMED(
-          "test_trajectory",
-          "Not follow joint trajectory action topic found on the parameter server");
+      ROS_FATAL_STREAM_NAMED("test_trajectory",
+                             "No joint trajectory controller parameter found on the parameter server");
       exit(-1);
     }
-    ROS_INFO_STREAM_NAMED("test_trajectory", "Connecting to action " << action_topic);
+    ROS_INFO_STREAM_NAMED("test_trajectory", "Connecting to controller " << trajectory_controller);
 
     // create the action client
     // true causes the client to spin its own thread
     actionlib::SimpleActionClient<control_msgs::FollowJointTrajectoryAction> action_client(
-        action_topic, true);
+        trajectory_controller + "/follow_joint_trajectory/", true);
 
     ROS_INFO_NAMED("test_trajetory", "Waiting for action server to start.");
     // wait for the action server to start
@@ -111,20 +108,19 @@ public:
     double max_joint_value = 3.14;
 
     // Get joint names
-    nh_private_.getParam("hardware_interface/joints", joint_names);
+    nh_private_.getParam(trajectory_controller + "/joints", joint_names);
     if (joint_names.size() == 0)
     {
-      ROS_FATAL_STREAM_NAMED(
-          "init",
-          "Not joints found on parameter server for controller, did you load the proper yaml file?"
-              << " Namespace: " << nh_private_.getNamespace() << "/hardware_interface/joints");
+      ROS_FATAL_STREAM_NAMED("init",
+                             "Not joints found on parameter server for controller, did you load the proper yaml file?"
+                                 << " Namespace: " << nh_private_.getNamespace() << "/hardware_interface/joints");
       exit(-1);
     }
 
     nh_private_.getParam("min_joint_value", min_joint_value);
     nh_private_.getParam("max_joint_value", max_joint_value);
-    ROS_DEBUG_STREAM_NAMED("test_trajectory", "Creating trajectory with joint values from "
-                                                  << min_joint_value << " to " << max_joint_value);
+    ROS_DEBUG_STREAM_NAMED("test_trajectory", "Creating trajectory with joint values from " << min_joint_value << " to "
+                                                                                            << max_joint_value);
 
     // Create header
     trajectory_msgs::JointTrajectory trajectory;
@@ -158,13 +154,15 @@ private:
   // A shared node handle
   ros::NodeHandle nh_private_;
 
+  // A string containing the 'trajectory_controller' parameter value
+  std::string trajectory_controller;
 };  // end class
 
-// Create boost pointers for this class
-typedef boost::shared_ptr<TestTrajectory> TestTrajectoryPtr;
-typedef boost::shared_ptr<const TestTrajectory> TestTrajectoryConstPtr;
+// Create std pointers for this class
+typedef std::shared_ptr<TestTrajectory> TestTrajectoryPtr;
+typedef std::shared_ptr<const TestTrajectory> TestTrajectoryConstPtr;
 
-}  // end namespace
+}  // namespace ros_control_boilerplate
 
 int main(int argc, char** argv)
 {
