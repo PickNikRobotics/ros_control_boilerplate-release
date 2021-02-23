@@ -38,7 +38,8 @@
 */
 
 #include <time.h>
-#include <ros_control_boilerplate/generic_hw_interface.h>
+#include <controller_manager/controller_manager.h>
+#include <hardware_interface/robot_hw.h>
 
 namespace ros_control_boilerplate
 {
@@ -60,15 +61,12 @@ public:
    * \param NodeHandle
    * \param hardware_interface - the robot-specific hardware interface to be use with your robot
    */
-  GenericHWControlLoop(
-      ros::NodeHandle& nh,
-      boost::shared_ptr<ros_control_boilerplate::GenericHWInterface> hardware_interface);
+  GenericHWControlLoop(ros::NodeHandle& nh, std::shared_ptr<hardware_interface::RobotHW> hardware_interface);
 
   // Run the control loop (blocking)
   void run();
 
 protected:
-
   // Update funcion called with loop_hz_ rate
   void update();
 
@@ -94,11 +92,11 @@ protected:
    * stopping ros_control-based controllers. It also serializes execution of all
    * running controllers in \ref update.
    */
-  boost::shared_ptr<controller_manager::ControllerManager> controller_manager_;
+  std::shared_ptr<controller_manager::ControllerManager> controller_manager_;
 
   /** \brief Abstract Hardware Interface for your robot */
-  boost::shared_ptr<ros_control_boilerplate::GenericHWInterface> hardware_interface_;
+  std::shared_ptr<hardware_interface::RobotHW> hardware_interface_;
 
 };  // end class
 
-}  // namespace
+}  // namespace ros_control_boilerplate
