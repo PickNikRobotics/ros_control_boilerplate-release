@@ -12,11 +12,23 @@ Simple simulation interface and template for setting up a hardware interface for
  - Pass-through non-physics based robot simulator
  - Visualization in Rviz
 
-Developed by [Dave Coleman](http://dav.ee/) at the University of Colorado Boulder
+<img src="https://picknik.ai/assets/images/logo.jpg" width="120">
 
- * [![Build Status](https://travis-ci.org/davetcoleman/ros_control_boilerplate.svg)](https://travis-ci.org/davetcoleman/ros_control_boilerplate) Travis CI
- * [![Devel Job Status](http://jenkins.ros.org/buildStatus/icon?job=devel-indigo-ros_control_boilerplate)](http://jenkins.ros.org/job/devel-indigo-ros_control_boilerplate) Devel Job Status
- * [![Build Status](http://jenkins.ros.org/buildStatus/icon?job=ros-indigo-ros-control-boilerplate_binarydeb_trusty_amd64)](http://jenkins.ros.org/job/ros-indigo-ros-control-boilerplate_binarydeb_trusty_amd64/) AMD64 Debian Job Status
+This open source project was developed at [PickNik Robotics](https://picknik.ai/). Need professional ROS development and consulting? Contact us at projects@picknik.ai for a free consultation.
+
+## Maintainers
+
+Special thanks to the following maintainers of this repo:
+
+ - Dave Coleman (@davetcoleman)
+ - Andy Zelenak (@AndyZe)
+ - John Morris (@zultron)
+ - Robert Wilbrandt (@RobertWilbrandt)
+
+## Status:
+
+ * [![Build Status](https://travis-ci.org/PickNikRobotics/ros_control_boilerplate.svg?branch=kinetic-devel)](https://travis-ci.org/PickNikRobotics/ros_control_boilerplate) Travis CI
+ * [![Devel Job Status](http://build.ros.org/buildStatus/icon?job=Kdev__ros_control_boilerplate__ubuntu_xenial_amd64)](http://build.ros.org/job/Kdev__ros_control_boilerplate__ubuntu_xenial_amd64/) Devel Job Status
 
 <img src="https://raw.githubusercontent.com/davetcoleman/ros_control_boilerplate/jade-devel/resources/screenshot.png"/>
 
@@ -39,7 +51,7 @@ Then, either install this package from source so you can develop off of it, or i
 
 This package is setup to run the "RRBot" two joint revolute-revolute robot demo. This "template package" is located in the ros_control_boilerplate as a subfolder that you can easily rename and reuse. To run its ros_control non-physics-based simulated hardware interface, run:
 
-    roslaunch ros_control_boilerplate rrbot_simulaton.launch
+    roslaunch ros_control_boilerplate rrbot_simulation.launch
 
 To visualize its published ``/tf`` coordinate transforms in Rviz run:
 
@@ -96,7 +108,7 @@ Joint-level teleop from a keyboard (TODO: remove had coded topic names)
 
 ## Limitations
 
- - Does not implement estops, transmissions, or other fancy new features of ros_contorl
+ - Does not implement estops, transmissions, or other fancy new features of ros_control
  - Does not have any hard realtime code, this depends largely on your platform, kernel, OS, etc
  - Only position control is fully implemented, though some code is in place for velocity control
 
