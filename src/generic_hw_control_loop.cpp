@@ -44,8 +44,8 @@
 
 namespace ros_control_boilerplate
 {
-GenericHWControlLoop::GenericHWControlLoop(
-    ros::NodeHandle& nh, boost::shared_ptr<ros_control_boilerplate::GenericHWInterface> hardware_interface)
+GenericHWControlLoop::GenericHWControlLoop(ros::NodeHandle& nh,
+                                           std::shared_ptr<hardware_interface::RobotHW> hardware_interface)
   : nh_(nh), hardware_interface_(hardware_interface)
 {
   // Create the controller manager
@@ -67,7 +67,8 @@ GenericHWControlLoop::GenericHWControlLoop(
 void GenericHWControlLoop::run()
 {
   ros::Rate rate(loop_hz_);
-  while(ros::ok()) {
+  while (ros::ok())
+  {
     update();
     rate.sleep();
   }
@@ -80,6 +81,7 @@ void GenericHWControlLoop::update()
   elapsed_time_ =
       ros::Duration(current_time_.tv_sec - last_time_.tv_sec + (current_time_.tv_nsec - last_time_.tv_nsec) / BILLION);
   last_time_ = current_time_;
+  ros::Time now = ros::Time::now();
   // ROS_DEBUG_STREAM_THROTTLE_NAMED(1, "generic_hw_main","Sampled update loop with elapsed
   // time " << elapsed_time_.toSec());
 
@@ -93,13 +95,13 @@ void GenericHWControlLoop::update()
   }
 
   // Input
-  hardware_interface_->read(elapsed_time_);
+  hardware_interface_->read(now, elapsed_time_);
 
   // Control
-  controller_manager_->update(ros::Time::now(), elapsed_time_);
+  controller_manager_->update(now, elapsed_time_);
 
   // Output
-  hardware_interface_->write(elapsed_time_);
+  hardware_interface_->write(now, elapsed_time_);
 }
 
-}  // namespace
+}  // namespace ros_control_boilerplate
