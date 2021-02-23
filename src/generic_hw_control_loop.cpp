@@ -33,8 +33,8 @@
  *********************************************************************/
 
 /* Author: Dave Coleman
-   Desc:   Example control loop for reading, updating, and writing commands to a hardware interface
-   using MONOTOIC system time
+   Desc:   Example control loop for reading, updating, and writing commands to a
+   hardware interface using MONOTOIC system time
 */
 
 #include <ros_control_boilerplate/generic_hw_control_loop.h>
@@ -82,8 +82,8 @@ void GenericHWControlLoop::update()
       ros::Duration(current_time_.tv_sec - last_time_.tv_sec + (current_time_.tv_nsec - last_time_.tv_nsec) / BILLION);
   last_time_ = current_time_;
   ros::Time now = ros::Time::now();
-  // ROS_DEBUG_STREAM_THROTTLE_NAMED(1, "generic_hw_main","Sampled update loop with elapsed
-  // time " << elapsed_time_.toSec());
+  // ROS_DEBUG_STREAM_THROTTLE_NAMED(1, "generic_hw_main","Sampled update loop
+  // with elapsed time " << elapsed_time_.toSec());
 
   // Error check cycle time
   const double cycle_time_error = (elapsed_time_ - desired_update_period_).toSec();

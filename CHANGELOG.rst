@@ -2,14 +2,22 @@
 Changelog for package ros_control_boilerplate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.5.1 (2021-02-23)
+0.6.1 (2021-02-23)
 ------------------
+* Increase required cmake version to fix CMake CMP0048 warning
 * Replaced boost with std shared_ptr
 * Make NodeHandle a const reference
 * test_trajectory:  Read joints list from trajectory controller params
-* Generalize GenericHWControlLoop to all types of RobotHW (`#38 <https://github.com/PickNikRobotics/ros_control_boilerplate/issues/38>`_)
 * Increase num AsyncSpinners where control loops are instantiated
-* Contributors: AndyZe, Dave Coleman, Jafar Abdi, John Morris, Ramon Wijnands, Robert Wilbrandt, RobertWilbrandt, Tim Übelhör
+* Contributors: AndyZe, Dave Coleman, John Morris, Ramon Wijnands, Robert Wilbrandt, Tim Übelhör
+
+0.6.0 (2020-06-16)
+------------------
+* Generalize GenericHWControlLoop to all types of RobotHW (`#38 <https://github.com/PickNikRobotics/ros_control_boilerplate/issues/38>`_)
+* Update README.md
+* Fix build badges in README (`#37 <https://github.com/PickNikRobotics/ros_control_boilerplate/issues/37>`_)
+* Update .travis.yml to use moveit_ci (`#36 <https://github.com/PickNikRobotics/ros_control_boilerplate/issues/36>`_)
+* Contributors: Jafar Abdi, RobertWilbrandt
 
 0.5.0 (2019-09-18)
 ------------------
