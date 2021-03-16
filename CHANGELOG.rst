@@ -2,6 +2,12 @@
 Changelog for package ros_control_boilerplate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.5.2 (2021-03-16)
+------------------
+* Revert "Replaced boost with std shared_ptr"
+  This reverts commit 9fa14cd3d00328efa3d44d7bf4d849ce909310f0.
+* Contributors: JafarAbdi
+
 0.5.1 (2021-02-23)
 ------------------
 * Replaced boost with std shared_ptr
